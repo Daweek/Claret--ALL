@@ -1,0 +1,14 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/edgar/graphics/Claret/Claret++ALL'
+ 
+g++  -std=c++11 -O3 -ffast-math -funroll-loops -fopenmp -I. -I/usr/local/cuda-11.2/include -I/usr/local/cuda-11.2/samples/common/inc -I/usr/local/cuda-11.2/include -I/usr/local/cuda-11.2/samples/common/inc -c Main.cpp -o Main.o 
+g++  -std=c++11 -O3 -ffast-math -funroll-loops -fopenmp -I. -I/usr/local/cuda-11.2/include -I/usr/local/cuda-11.2/samples/common/inc -c Crass.cpp -o Crass.o		
+g++  -std=c++11 -O3 -ffast-math -funroll-loops -fopenmp -I. -I/usr/local/cuda-11.2/include -I/usr/local/cuda-11.2/samples/common/inc -c WindowGL.cpp -o WindowGL.o	
+g++  -std=c++11 -O3 -ffast-math -funroll-loops -fopenmp -I. -I/usr/local/cuda-11.2/include -I/usr/local/cuda-11.2/samples/common/inc -c Render.cpp -o Render.o
+/usr/local/cuda-11.2/bin/nvcc   --compile -std=c++11 -O3 --cudart=shared -use_fast_math -gencode arch=compute_61,code=sm_61 -Xcompiler -O3,-ffast-math,-funroll-loops,-fopenmp -I. -I/usr/local/cuda-11.2/include -I/usr/local/cuda-11.2/samples/common/inc Accel.cu -o Accel.o 
+g++  -std=c++11 -O3 -ffast-math -funroll-loops -fopenmp -I. -c shader.cpp -o shader.o	
+g++  -std=c++11 -O3 -ffast-math -funroll-loops -fopenmp -I. -c text2D.cpp -o text2D.o
+g++  -std=c++11 -O3 -ffast-math -funroll-loops -fopenmp -I. -c texture.cpp -o texture.o	
+/usr/local/cuda-11.2/bin/nvcc   -std=c++11 -O3 --cudart=shared -use_fast_math -gencode arch=compute_61,code=sm_61 -Xcompiler -O3,-ffast-math,-funroll-loops,-fopenmp -I/usr/local/cuda-11.2/include -I/usr/local/cuda-11.2/samples/common/inc -o claret++ Main.o Crass.o WindowGL.o Render.o Accel.o shader.o text2D.o texture.o -L/usr/lib/x86_64-linux-gnu -L/usr/local/cuda-11.2/lib64 -lcuda -lcudart -lcudadevrt -lGL -lGLU -lGLEW -lglfw -lm 
+make: Leaving directory '/home/edgar/graphics/Claret/Claret++ALL'
+ 
